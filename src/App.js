@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+  // Storing value using use state
+  const [ time, setTime] = useState({ms:0,s:0,m:0})
+
+
+  return <div className="App">
+    <h1>Stopwatch</h1>
+    <div className="stopwatch-card">
+      <p>00.00.0000</p>
+      <div className="buttons">
+        <button>Start</button>
+        <button>Stop</button>
+        <button>Pause</button>
+      </div>
     </div>
-  );
+  </div>;
 }
 
 export default App;
