@@ -6,6 +6,7 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
   // using useeffect to effects of the components and set up a time
+  // basically useeffect will do something after render
   useEffect(() => {
     let interval;
     // defining the condition here and return
@@ -19,6 +20,9 @@ function App() {
 
     return () => clearInterval(interval);
   }, [isRunning]);
+
+  
+  
 
   const handleStartStop = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
