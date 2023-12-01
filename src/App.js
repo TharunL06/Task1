@@ -7,7 +7,7 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [time, setTime] = useState(0);
 
-  const startTime = Date.now();
+  let startTime = Date.now();
   // console.log(startTime);
   // using useeffect to effects of the components and set up a time
   // basically useeffect will do something after render
@@ -42,8 +42,21 @@ function App() {
     return () => clearInterval(interval);
   }, [isRunning, isPaused]);
 
+  // let timeStart = startTime - time;
   const handleStartStop = () => {
-    setIsRunning((prevIsRunning) => !prevIsRunning);
+    setIsRunning((prevIsRunning) => {
+      if (isPaused) {
+        // If running or paused, stop the stopwatch
+        setIsPaused(true);
+        return false;
+      } else {
+        // If not running, start the stopwatch or resume from where it was stopped
+        setIsPaused(false);
+        // return timeStart;
+
+        return true;
+      }
+    });
   };
 
   const handleReset = () => {
@@ -54,6 +67,7 @@ function App() {
 
   const handlePause = () => {
     setIsPaused(true);
+    setIsRunning(false);
   };
 
   return (
@@ -67,7 +81,7 @@ function App() {
             {isRunning && !isPaused ? "Stop" : "Start"}
           </button>
           <button onClick={handleReset}>Reset</button>
-          <button onClick={handlePause} disabled={!isPaused || isPaused}>Pause</button>
+          <button onClick={handlePause}>Pause</button>
         </div>
       </div>
     </div>
